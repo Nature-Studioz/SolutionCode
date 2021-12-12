@@ -1,0 +1,42 @@
+public Vector3 StartPos;
+    
+    public float MoveSpeed;
+    
+    public float MoveBackSpeed;
+
+    private void Start()
+    {
+        StartPos = transform.position;
+    }
+
+    public bool HasPerformed;
+   
+    public void OnButtonPressed(CallbackContext context)
+    {
+      
+        if (context.performed)
+        {
+
+            HasPerformed = true;
+          
+        }
+
+        else
+        {
+            HasPerformed = false;
+        }
+    }
+    
+
+    private void FixedUpdate()
+    {
+        if (HasPerformed)
+        {
+            transform.Translate(MoveSpeed, 0f, 0f, Space.World);
+        }
+
+        else
+        {
+            transform.position = Vector3.MoveTowards(transform.position, StartPos, MoveBackSpeed);
+        }
+    }
